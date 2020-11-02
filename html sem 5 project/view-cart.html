@@ -1,0 +1,171 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>View Cart - KAShop</title>
+		<!-- Bootstrap -->
+		<link href="css/bootstrap.min.css" rel="stylesheet"/>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/simpleCart.min.js"></script>
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<link rel="stylesheet" href="css/main.css"/>
+		<style>
+		table{width:100%;}
+		.item-image, .item-name, .item-price, .item-quantity, .item-total{text-align: center;}
+		.btn-nav-cart{float:right;}
+		.price-info{float:left;}
+		</style>
+		<script>
+		simpleCart({
+			checkout: {
+				type: "PayPal",
+				email: "you@yours.com"
+			},
+			cartStyle: "table",
+			cartColumns: [
+				   { view: function(item, column){return"<img src='"+item.get('image')+"'>";}, attr: "image", label: "Image" },
+ 			       { attr: "name" , label: "Name" } ,
+			       { attr: "price" , label: "Price", view: "currency" } ,
+			       { view: "input", attr: "quantity", label: "Qty" },
+			       { attr: "total" , label: "SubTotal", view: "currency" } ,
+			       { view: "remove" , text: "<i class='fa fa-remove'></i>" , label: false }
+			]
+		});
+		simpleCart.currency({ code:"IDR", symbol:"Rp ", name:"Indonesian Rupiah", delimiter: ".", decimal: ",", after: false,accuracy: 0 });
+		</script>
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+						<li><a href="#"><i class="fa fa-file-text"></i> Blog</a></li>
+						<li><a href="#"><i class="fa fa-users"></i> Community</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown-cart">
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#"><i class="fa fa-shopping-bag"></i> Cart <span class="badge simpleCart_quantity">0</span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a>Total: <span class="simpleCart_total"></span></a></li>
+								<li class="divider"></li>
+								<li class="text-center"><a href="view-cart.html"><i class="fa fa-shopping-bag"></i> View Cart</a></li>
+								<li class="text-center"><a href="javascript:;" class="simpleCart_checkout"><i class="fa fa-shopping-cart"></i> Checkout</a></li>
+								<li class="divider"></li>
+								<li class="text-center"><a href="#EmptyCart" onclick="simpleCart.empty();simpleCart.update();"><i class="fa fa-remove"></i> Empty Cart</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i> Users <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="login.html"><i class="fa fa-sign-in"></i> Login</a></li>
+								<li><a href="#"><i class="fa fa-pencil-square-o"></i> Register</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="jumbotron">
+			<div class="container">
+				<div class="col-md-3">
+					<a href="/olshop/" class="text-center" title="KAShop - Trusted Online Shop"><img src="img/logo.png" alt="KAShop - Trusted Online Shop" title="KAShop - Trusted Online Shop"></a>
+				</div>
+				<div class="col-md-9" style="margin-top:7.5px;">
+					<form role="search">
+						<div class="col-md-10">
+							<input type="text" class="form-control" placeholder="Search Product...">
+						</div>
+						<div class="col-md-2"><button type="submit" class="btn btn-default">Search <i class="fa fa-search"></i></button></div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<h3 class="panel-title"><i class="fa fa-shopping-basket"></i> Your Cart - <span class="label label-primary simpleCart_quantity">0</span></h3>
+						</div>
+						<div class="panel-body">
+							<div class="simpleCart_items table table-striped table-hover"></div>
+							<div class="btn-nav-cart">
+								<b>Total Cart:</b> <span class="simpleCart_total"></span><br>
+								<b>Total Tax:</b> <span class="simpleCart_tax"></span><br>
+								<b>Shipping:</b> <span class="simpleCart_shipping"></span>
+								<hr>
+								<b>Total:</b> <span class="simpleCart_grandTotal"></span>
+								<hr>
+								<a href="javascript:;" class="btn btn-danger simpleCart_empty"><i class="fa fa-shopping-basket"></i> Empty Cart</a> <a href="javascript:;" class="btn btn-primary simpleCart_checkout"><i class="fa fa-shopping-cart"></i> Checkout</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="jumbotron footer">
+			<div class="container">
+				<div class="col-md-3">
+					<h4>Site Info</h4>
+					<ul class="footer-menu">
+						<li><a href="#">About Us</a></li>
+						<li><a href="#">Disclaimer</a></li>
+						<li><a href="#">Privacy</a></li>
+						<li><a href="#">Terms</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<h4>Navigation</h4>
+					<ul class="footer-menu">
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Best Seller</a></li>
+						<li><a href="#">Best Product</a></li>
+						<li><a href="#">Shipping</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<h4>Find Us</h4>
+					<ul class="footer-menu">
+						<li><a href="#">Facebook</a></li>
+						<li><a href="#">Twitter</a></li>
+						<li><a href="#">Google+</a></li>
+						<li><a href="#">YouTube</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<h4>Subscribe Via Email</h4>
+					<form role="search">
+						<input type="text" class="form-control" placeholder="Your Email"><br/>
+						<button type="submit" class="btn btn-default" style="width:100%;">Subscribe Now</button>
+					</form>
+				</div>
+				<div class="col-md-12">
+					<hr>
+					<small>Copyright &copy;2015 <a href="/">KAShop</a>, All Right Reserved.</small>
+				</div>
+			</div>
+		</div>
+		<script src="js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$(window).scroll(function(){
+					$(this).scrollTop()>50?$(".navbar").addClass("navbar-fixed-top"):$(".navbar").removeClass("navbar-fixed-top")
+				})
+			});
+		</script>
+	</body>
+</html>
